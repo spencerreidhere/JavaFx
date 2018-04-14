@@ -43,7 +43,11 @@ public class GameGUI {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Neues Spiel");
+				for (final Tile[] tiles : board) {
+					for (final Tile tile : tiles) {
+						tile.setValue("");
+					}
+				}
 			}
 		});
 
