@@ -13,7 +13,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Memory --v0.1SNAPSHOT");
 
 			final BorderPane root = new BorderPane();
-			final Scene scene = new Scene(root, 401, 438);
+			final Scene scene = new Scene(root, 801, 838);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			new GameGUI(root);

@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 public class GameGUI {
 
 	private final BorderPane borderPane;
-	private final Tile[][] board = new Tile[2][2];
+	private final Tile[][] board = new Tile[4][4];
 	private final Pane pane = new Pane();
 
 	private boolean checkState = false;
@@ -56,12 +56,12 @@ public class GameGUI {
 	}
 
 	private void addCenter() {
-		final List<Integer> memoryIds = Arrays.asList(1, 1, 2, 2);
+		final List<Integer> memoryIds = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8);
 		Collections.shuffle(memoryIds);
 		Integer memoryId = 0;
 
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 2; j++) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
 				final Tile tile = new Tile(memoryIds.get(memoryId));
 				memoryId++;
 				tile.setTranslateX(j * 200);
@@ -75,6 +75,7 @@ public class GameGUI {
 
 	private class Tile extends StackPane {
 		private final Text text = new Text();
+		private Tile currentTile;
 
 		public Tile(final Integer memoryId) {
 			final Rectangle border = new Rectangle(200, 200);
@@ -90,6 +91,7 @@ public class GameGUI {
 			setOnMouseClicked(event -> {
 				text.setText("M " + memoryId);
 				if (!checkState) {
+					currentTile = this;
 					checkState = true;
 				} else {
 					checkState(this);
@@ -110,23 +112,17 @@ public class GameGUI {
 	}
 
 	private void checkState(Tile tile) {
-		final Tile tile1 = board[0][0];
-		final Tile tile2 = board[0][1];
-		final Tile tile3 = board[1][0];
-		final Tile tile4 = board[1][1];
-
-		final List<Tile> tiles = Arrays.asList(tile1, tile2, tile3, tile4);
 		boolean found = false;
-		for (final Tile testTile : tiles) {
-			if (tile.getValue().equals(testTile.getValue()) && !tile.equals(testTile)) {
-				found = true;
-				break;
+		for (final Tile[] tiles : board) {
+			for (final Tile testTile : tiles) {
+				if (tile.getValue().equals(testTile.getValue()) && !tile.equals(testTile)) {
+					found = true;
+					break;
+				}
 			}
 		}
 		if (!found) {
-			for (final Tile testTile : tiles) {
-				testTile.setValue("");
-			}
+			// TODO
 		}
 
 	}
