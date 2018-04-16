@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/29374129/how-to-wait-for-users-action-in-javafx-in-the-same-stage
