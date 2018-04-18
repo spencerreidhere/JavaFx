@@ -17,8 +17,7 @@ public class Main extends Application {
 			final Scene scene = new Scene(root, 801, 838);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-			final MemoryController memoryController = new MemoryController();
-			new MemoryBoard(root, memoryController);
+			new MemoryBoard(root, new MemoryController());
 
 			primaryStage.setScene(scene);
 			primaryStage.show();

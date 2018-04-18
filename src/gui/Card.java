@@ -34,7 +34,7 @@ public class Card extends StackPane {
 			} else {
 				memoryBoard.disable(true);
 				// wait 0,5 second
-				final Timeline tl = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+				final Timeline tl = new Timeline(new KeyFrame(Duration.millis(500), e -> {
 					controller.setSecondCard(this);
 					controller.check();
 					controller.setCheckTime(false);
