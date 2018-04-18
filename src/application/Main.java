@@ -1,6 +1,7 @@
 package application;
 
-import gui.GameGUI;
+import controller.MemoryController;
+import gui.MemoryBoard;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -16,10 +17,12 @@ public class Main extends Application {
 			final Scene scene = new Scene(root, 801, 838);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-			new GameGUI(root);
+			final MemoryController memoryController = new MemoryController();
+			new MemoryBoard(root, memoryController);
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
