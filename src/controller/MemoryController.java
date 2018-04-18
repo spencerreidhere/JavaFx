@@ -6,6 +6,8 @@ import gui.Card;
 
 public class MemoryController extends Observable {
 
+	public static final String CHECK = "check";
+
 	private Card firstCard;
 	private Card secondCard;
 	private boolean checkTime;
@@ -31,7 +33,7 @@ public class MemoryController extends Observable {
 
 	public void check() {
 		setChanged();
-		notifyObservers();
+		notifyObservers(CHECK);
 	}
 
 	public boolean isCheckTime() {

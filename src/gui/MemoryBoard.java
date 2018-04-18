@@ -82,12 +82,14 @@ public class MemoryBoard implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (memoryController.getFirstCard().getValue().equals(memoryController.getSecondCard().getValue())) {
-			memoryController.getFirstCard().setFound();
-			memoryController.getSecondCard().setFound();
-		} else {
-			memoryController.getFirstCard().setValue("");
-			memoryController.getSecondCard().setValue("");
+		if (arg.equals(MemoryController.CHECK)) {
+			if (memoryController.getFirstCard().getValue().equals(memoryController.getSecondCard().getValue())) {
+				memoryController.getFirstCard().setFound();
+				memoryController.getSecondCard().setFound();
+			} else {
+				memoryController.getFirstCard().setValue("");
+				memoryController.getSecondCard().setValue("");
+			}
 		}
 	}
 
