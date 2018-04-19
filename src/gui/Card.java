@@ -17,7 +17,7 @@ public class Card extends StackPane {
 
 	public Card(final Integer memoryId, MemoryController controller, final MemoryBoard memoryBoard) {
 		border = new Rectangle(200, 200);
-		border.setFill(null);
+		border.setFill(Color.WHITE);
 		border.setStroke(Color.BLACK);
 
 		text.setFont(Font.font(72));
@@ -32,17 +32,19 @@ public class Card extends StackPane {
 				controller.setFirstCard(this);
 				controller.setCheckTime(true);
 			} else {
-				memoryBoard.disable(true);
-				// wait 1 second
-				final Timeline tl = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
-					controller.setSecondCard(this);
-					controller.check();
-					controller.setCheckTime(false);
+				if (!controller.getFirstCard().equals(this)) {
+					memoryBoard.disable(true);
+					// wait 1 second
+					final Timeline tl = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+						controller.setSecondCard(this);
+						controller.check();
+						controller.setCheckTime(false);
 
-					memoryBoard.disable(false);
-				}));
-				tl.setCycleCount(1);
-				tl.play();
+						memoryBoard.disable(false);
+					}));
+					tl.setCycleCount(1);
+					tl.play();
+				}
 			}
 		});
 
@@ -56,8 +58,11 @@ public class Card extends StackPane {
 		this.text.setText(text);
 	}
 
+	public Rectangle getRectangleBorder() {
+		return border;
+	}
+
 	public void setFound() {
 		border.setFill(Color.GREENYELLOW);
 	}
-
 }

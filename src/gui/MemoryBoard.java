@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class MemoryBoard implements Observer {
 
@@ -45,6 +46,7 @@ public class MemoryBoard implements Observer {
 				for (final Card[] cards : boardCards) {
 					for (final Card card : cards) {
 						card.setValue("");
+						card.getRectangleBorder().setFill(Color.WHITE);
 					}
 				}
 			}
@@ -83,7 +85,8 @@ public class MemoryBoard implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg.equals(MemoryController.CHECK)) {
-			if (memoryController.getFirstCard().getValue().equals(memoryController.getSecondCard().getValue())) {
+			if (memoryController.getFirstCard().getValue().equals(memoryController.getSecondCard().getValue())
+					&& !memoryController.getFirstCard().equals(memoryController.getSecondCard())) {
 				memoryController.getFirstCard().setFound();
 				memoryController.getSecondCard().setFound();
 			} else {
