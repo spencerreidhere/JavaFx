@@ -43,10 +43,15 @@ public class MemoryBoard implements Observer {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				final List<Integer> memoryIds = getShuffledMemoryIds();
+				Integer memoryId = 0;
 				for (final Card[] cards : boardCards) {
 					for (final Card card : cards) {
 						card.setValue("");
 						card.getRectangleBorder().setFill(Color.WHITE);
+						card.activate();
+						card.updateMemoryId(memoryIds.get(memoryId));
+						memoryId++;
 					}
 				}
 			}
@@ -57,8 +62,7 @@ public class MemoryBoard implements Observer {
 	}
 
 	private void addCenter() {
-		final List<Integer> memoryIds = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8);
-		Collections.shuffle(memoryIds);
+		final List<Integer> memoryIds = getShuffledMemoryIds();
 		Integer memoryId = 0;
 
 		for (int i = 0; i < 4; i++) {
@@ -72,6 +76,12 @@ public class MemoryBoard implements Observer {
 			}
 		}
 		borderPane.setCenter(pane);
+	}
+
+	private List<Integer> getShuffledMemoryIds() {
+		final List<Integer> memoryIds = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8);
+		Collections.shuffle(memoryIds);
+		return memoryIds;
 	}
 
 	protected void disable(final boolean disable) {
